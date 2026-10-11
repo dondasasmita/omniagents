@@ -9,6 +9,35 @@ the bump rules and the release workflow.
 
 ## [Unreleased]
 
+### Added
+
+- **`omniagents-design-patterns:api-design`** — REST and gRPC API contract
+  design grounded in Google's API Improvement Proposals (AIPs). Like `kong`,
+  it deliberately encodes **no Google rules**: AIPs keep moving (AIP-184 and
+  interface-based versioning landed 2026-08-17; AIP-136, AIP-164, and AIP-203
+  changed earlier in 2026), and a red-team run of the first draft found fetch
+  summaries corrupting requirement levels and conditions in ten places. It
+  encodes the protocol instead — anchor mode, surface, release status, and
+  the local standard; retrieve only what will be cited, best method first
+  (context7 `/aip-dev/google.aip.dev`, raw AIP markdown, then a per-rule
+  extraction prompt), with observable triggers for when to search; label
+  every claim as [AIP], [AIP-DRAFT], [SPEC], [PRECEDENT], [TEAM], or
+  [JUDGMENT], where only [AIP] may say must/should/may; resolve conflicts
+  through a precedence order with a correctness/security floor; calibrate
+  ceremony ("adopt now what is breaking to add later") so small APIs do not
+  copy Google infrastructure. Five references: a verified topic-to-AIP map
+  with a vocabulary bridge and stale-priors list, a design-doc template with
+  CC BY 4.0 attribution, an impact-based review rubric that is safe on live
+  APIs, implement-mode conventions for citing AIPs in protos, OpenAPI, and
+  handlers (including AIP-200's `not-precedent` deviations), and
+  REST/OpenAPI rendering notes covering ProtoJSON and the AEP linter's
+  conflicts with AIPs.
+
+### Changed
+
+- **`omniagents-design-patterns:system`** — routes API contract questions
+  to the new `api-design` skill from its "does NOT cover" list.
+
 ## [1.1.0] - 2026-09-19
 
 ### Added

@@ -39,14 +39,16 @@
     {
       "name": "omniagents-design-patterns",
       "source": "./plugins/design-patterns",
-      "description": "Strict-typed Python 3.13+ design pattern catalogue plus deep-module design philosophy (software + system + codebase-design)",
+      "description": "Strict-typed Python 3.13+ design pattern catalogue, deep-module design philosophy, and AIP-grounded API contract design (software + system + codebase-design + api-design)",
       "category": "architecture",
       "keywords": [
         "design-patterns",
         "python",
         "architecture",
         "system-design",
-        "deep-modules"
+        "deep-modules",
+        "api-design",
+        "aip"
       ]
     },
     {

@@ -161,6 +161,10 @@ kebab-case slugs of the heading text.
   observability stack choice). The cloud and reliability files
   describe shapes; codifying them in particular tooling lives
   elsewhere.
+- **API contract design** — resource names, standard vs custom
+  methods, pagination, error models, field masks, and versioning once
+  a request/response API is the chosen channel. Load the `api-design`
+  skill from this plugin; it grounds each choice in Google's AIPs.
 
 If a question lands outside this scope, say so rather than bending one
 of the references to fit. If a question lands *inside* the scope but

@@ -1,7 +1,7 @@
 {
   "name": "omniagents-design-patterns",
   "version": "1.1.0",
-  "description": "Strict-typed Python 3.13+ design pattern catalogue, split into three skills: software (in-service patterns — GoF, functional/ADTs, DDD, architectural, in-process concurrency, code anti-patterns), system (cross-service patterns — reliability, communication, distributed, data, scaling, cloud, distributed anti-patterns), and codebase-design (Ousterhout interface depth — deep vs shallow modules, information hiding, deletion test, design-it-twice).",
+  "description": "Design pattern catalogue and API contract design, split into four skills: software (strict-typed Python 3.13+ in-service patterns — GoF, functional/ADTs, DDD, architectural, in-process concurrency, code anti-patterns), system (strict-typed Python 3.13+ cross-service patterns — reliability, communication, distributed, data, scaling, cloud, distributed anti-patterns), codebase-design (Ousterhout interface depth — deep vs shallow modules, information hiding, deletion test, design-it-twice), and api-design (REST/gRPC API contracts grounded in Google's API Improvement Proposals — retrieved live and cited, never recalled).",
   "author": {
     "name": "GAO Hongnan",
     "email": "hongnangao@gmail.com"
@@ -21,7 +21,12 @@
     "event-sourcing",
     "anti-patterns",
     "architecture",
-    "deep-modules"
+    "deep-modules",
+    "api-design",
+    "aip",
+    "openapi",
+    "protobuf",
+    "grpc"
   ],
   "skills": "./skills/"
 }
