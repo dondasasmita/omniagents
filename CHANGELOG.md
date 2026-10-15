@@ -9,6 +9,8 @@ the bump rules and the release workflow.
 
 ## [Unreleased]
 
+## [1.3.0] - 2026-10-15
+
 ### Added
 
 - **`omniagents-unknowns:depth-pass`** — Felix Rieseberg's "deeper version of
