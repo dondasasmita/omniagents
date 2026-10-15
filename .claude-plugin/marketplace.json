@@ -191,14 +191,16 @@
     {
       "name": "omniagents-unknowns",
       "source": "./plugins/unknowns",
-      "description": "Blindspot pass: survey unfamiliar territory, surface unknown unknowns, and turn them into a sharper prompt before work begins",
+      "description": "Blindspot pass and depth pass: surface unknown unknowns in unfamiliar territory, or rewrite a task the way a top professional would do it — both end in a sharper prompt before work begins",
       "category": "productivity",
       "keywords": [
         "unknowns",
         "blindspot",
         "prompting",
         "scoping",
-        "map-territory"
+        "map-territory",
+        "depth",
+        "verification"
       ]
     },
     {

@@ -1,7 +1,7 @@
 {
   "name": "omniagents-unknowns",
   "version": "1.2.0",
-  "description": "Blindspot pass for unfamiliar territory: survey the codebase or domain, surface the user's unknown unknowns, and turn them into a sharper prompt before work begins",
+  "description": "Pre-work passes that end in a sharper prompt: a blindspot pass that surveys unfamiliar territory for the user's unknown unknowns, and a depth pass that rewrites a task the way a top professional would do it — rawest material, named methods, and a check that can fail",
   "author": {
     "name": "GAO Hongnan",
     "email": "hongnangao@gmail.com"
@@ -14,7 +14,9 @@
     "blindspot",
     "prompting",
     "scoping",
-    "map-territory"
+    "map-territory",
+    "depth",
+    "verification"
   ],
   "skills": "./skills/"
 }

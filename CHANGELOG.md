@@ -9,6 +9,30 @@ the bump rules and the release workflow.
 
 ## [Unreleased]
 
+### Added
+
+- **`omniagents-unknowns:depth-pass`** — Felix Rieseberg's "deeper version of
+  this task, not a bigger one" prompt, packaged as a pre-work pass beside
+  `blindspot-pass`. Before rewriting a prompt it answers four questions — what
+  a top professional would do that the user isn't asking for, the rawest
+  material they would start from, the specific methods and tools they would
+  use, and what other than the model or the user would show the result is
+  right — then rewrites the prompt to ask for exactly that. Each question gets
+  a guard against the generic answer it invites: a named practitioner instead
+  of "an expert", a digestion ladder from the dashboard down to the event
+  rows, methods tied to the step they serve, and a catalogue of outside checks
+  (executable, measured, reconciled, traced, predicted, judged, reality) that
+  rules out self-review and user approval. A size test keeps it deeper rather
+  than bigger: the rewrite may add steps, never deliverables, and trivial
+  tasks get one line and the missing check instead of the full pass. Ships six
+  eval scenarios in `plugins/unknowns/evals/` that score depth against scope,
+  with the raw prompt pasted verbatim as the baseline to beat.
+
+### Changed
+
+- **`omniagents-unknowns`** — plugin and marketplace descriptions cover both
+  passes, and the plugin README gains a "Which pass?" guide.
+
 ## [1.2.0] - 2026-10-11
 
 ### Added
