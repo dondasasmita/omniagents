@@ -417,7 +417,12 @@ After switching or rolling back, run `/plugin marketplace update omniagents` and
 
 ### Cutting a release (maintainers)
 
-Accumulate notes under `## [Unreleased]` in `CHANGELOG.md` as you work, then:
+Accumulate notes under `## [Unreleased]` in `CHANGELOG.md` as you work. Before
+tagging, run the eval suites (Actions → **VALIDATE** → *Run workflow* — see
+[Plugin evals](#plugin-evals-manual)) and record in the release's CHANGELOG
+section the pass rate per suite and the with-vs-without activation delta for
+the trigger guards — the release notes then say not just what changed but that
+behavior measurably held. Then:
 
 ```bash
 make release VERSION=0.2.0   # bumps every manifest, stamps CHANGELOG, validates, commits, tags v0.2.0
@@ -676,6 +681,27 @@ Validate the plugin structure:
 
 ```bash
 claude plugin validate ./plugins/doc-drift
+```
+
+---
+
+## Plugin evals (manual)
+
+The reviewer, unknowns (`depth-pass`), python, and devops plugins ship eval
+suites in the `claude plugin eval` format (see each plugin's `evals/`). A
+manual **VALIDATE** workflow dispatch (Actions → VALIDATE → *Run workflow*)
+runs every suite with pinned models, `--trust-plugin`, a `--max-cost-usd`
+ceiling, and archives each `results.json` as a build artifact. Trigger guards
+(`python:typings`, `python:testing`, `devops:github-actions`) run with a
+with-vs-without ablation so a description trim that silently kills activation
+shows up as a delta, not a hunch. Requires an `ANTHROPIC_API_KEY` (or CI
+subscription token) repository secret.
+
+Locally:
+
+```bash
+claude plugin eval plugins/reviewer --scaffold \
+  --model claude-sonnet-4-5 --judge-model claude-sonnet-4-5 --trust-plugin --no-publish
 ```
 
 ---

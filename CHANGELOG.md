@@ -11,6 +11,23 @@ the bump rules and the release workflow.
 
 ### Added
 
+- **Evals in the official `claude plugin eval` format (gap H1)** — the reviewer
+  (7 cases) and `depth-pass` (6 cases) suites are ported from the manual
+  skill-creator `evals.json` layout to per-case directories (`prompt.md`,
+  `case.yaml`, `graders/*.md`), reusing the seeded-bug fixtures via per-case
+  `scaffold_script`s; recall assertions became `regex` graders on
+  `review.json`, artifact checks became `file_exists`/`regex`, precision and
+  depth/scope assertions became `llm` rubric graders. New trigger guards —
+  `python:typings`, `python:testing`, `devops:github-actions` — each with a
+  should-fire and a should-not-fire case scored by a `tool_used` (Skill)
+  grader, so description edits that silently kill activation show as a
+  with-vs-without delta. A manual (`workflow_dispatch`) **VALIDATE** job runs
+  every suite with pinned models, `--trust-plugin`, a `--max-cost-usd`
+  ceiling, and archives `results.json`; the release checklist now records the
+  pass rate and the ablation delta in each release's CHANGELOG section.
+
+### Added
+
 - **Tests for the bundled Python tooling (gap M5)** — `pytest` suite
   (`plugins/reviewer/tests/`) covering `review-contract/schema.py` (the
   contract validator the reviewer pipeline and evals depend on): one valid and
