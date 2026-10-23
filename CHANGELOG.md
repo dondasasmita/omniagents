@@ -9,6 +9,21 @@ the bump rules and the release workflow.
 
 ## [Unreleased]
 
+### Changed
+
+- **Skill listing metadata diet (gap M3)** — the full-suite total of
+  `description` + `when_to_use` across all 32 skills is trimmed from 22,618
+  to **14,970 characters**, back under the ~15,000-character default listing
+  budget (≈1% of context). Above it, Claude Code silently drops skill
+  descriptions least-invoked-first — installed skills become inert without
+  anyone noticing. Method: the audit's F2 rule — delete `when_to_use` items
+  duplicated by the description, keep every primary trigger as the first
+  sentence (truncation cuts from the end), keep file-type triggers. The
+  frontmatter gate now enforces the 15,000 budget in CI, so the diet holds.
+  The H1 trigger evals (`python:typings`, `python:testing`,
+  `devops:github-actions` should/should-not-fire cases) are the regression
+  net for activation.
+
 ### Added
 
 - **Evals in the official `claude plugin eval` format (gap H1)** — the reviewer

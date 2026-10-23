@@ -3,7 +3,6 @@
 # directory, description 1-1024, description+when_to_use <= 1536 per skill and
 # <= MAX_TOTAL_CHARS across the suite). Exit 1 with violations listed.
 #
-#
 set -euo pipefail
 
 command -v python3 >/dev/null 2>&1 || { echo "error: python3 is required but not on PATH"; exit 1; }
@@ -16,7 +15,7 @@ import glob
 import re
 import sys
 
-MAX_TOTAL_CHARS = 24000  # ratchet; lower alongside trims
+MAX_TOTAL_CHARS = 15000  # full-suite listing budget (~1% of context)
 
 DELIM = re.compile(r"^---\s*$")
 KEY = re.compile(r"^([A-Za-z][A-Za-z0-9_-]*):(.*)$")
