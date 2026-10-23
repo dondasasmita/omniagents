@@ -9,6 +9,19 @@ the bump rules and the release workflow.
 
 ## [Unreleased]
 
+### Added
+
+- **Tests for the bundled Python tooling (gap M5)** — `pytest` suite
+  (`plugins/reviewer/tests/`) covering `review-contract/schema.py` (the
+  contract validator the reviewer pipeline and evals depend on): one valid and
+  one invalid artifact per schema kind (Finding, SpecialistReport,
+  ReviewReport), renderer citation guarantees, scope enforcement, confidence
+  floors, and CLI exit codes; plus `post_pr_comments.py`'s offline `--dry-run`
+  path (no network, no `gh`, no git repo). Runs in the M1 CI workflow. The
+  dry-run tests caught a real bug: with `gh` absent from PATH the script
+  crashed with `FileNotFoundError` instead of printing placeholder payloads —
+  fixed to raise the `RuntimeError` the dry-run path already handles.
+
 ### Fixed
 
 - **`doc-drift` blocks at most once per change set (gap M4)** — the Stop hook
