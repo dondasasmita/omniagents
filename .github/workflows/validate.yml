@@ -39,3 +39,6 @@ jobs:
 
       - name: Skill frontmatter rules and listing budget
         run: ./scripts/check-frontmatter.sh
+
+      - name: Plugin hook tests
+        run: bash plugins/doc-drift/tests/test-check-doc-drift.sh

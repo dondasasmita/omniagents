@@ -9,6 +9,18 @@ the bump rules and the release workflow.
 
 ## [Unreleased]
 
+### Fixed
+
+- **`doc-drift` blocks at most once per change set (gap M4)** — the Stop hook
+  re-blocked on every turn while the tree was dirty (`stop_hook_active` only
+  suppresses the loop within one stop sequence), costing tokens every turn
+  until the user commits. It now stores a hash of `git diff` plus the
+  untracked list in `${CLAUDE_PLUGIN_DATA}` and stays silent while the tree
+  is unchanged; a clean tree clears the state so the next change set blocks
+  again. New `plugins/doc-drift/tests/test-check-doc-drift.sh` covers clean
+  pass, first dirty block, repeated-stop silence, new-changeset re-block, and
+  state clearing — and runs in the M1 CI workflow.
+
 ### Added
 
 - **`make check-links`** (gap L2) — `scripts/check-links.sh` fails on broken
