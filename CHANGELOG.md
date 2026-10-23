@@ -11,6 +11,20 @@ the bump rules and the release workflow.
 
 ### Changed
 
+- **`library-patterns` hub-and-references split (gap M6)** — both
+  monolithic SKILL.md bodies (`python` 641 lines, `typescript` 602) exceeded
+  the 500-line guidance and got truncated after compaction (only the first
+  ~5k tokens re-attach). Each is now a lean hub (134 / 122 lines:
+  non-negotiables, cross-references, a routing table, sources, freshness)
+  plus one-level-deep `references/` files grouped by concern —
+  construction-and-retries, errors-and-outputs, streaming-and-pagination —
+  all under 210 lines. Sections moved verbatim; a line-level diff
+  verification confirms every non-empty line of the originals exists in the
+  new layout (0 of 511 / 491 lines lost), and only the relevant reference
+  loads on demand.
+
+### Changed
+
 - **Skill listing metadata diet (gap M3)** — the full-suite total of
   `description` + `when_to_use` across all 32 skills is trimmed from 22,618
   to **14,970 characters**, back under the ~15,000-character default listing
