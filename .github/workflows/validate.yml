@@ -40,6 +40,9 @@ jobs:
       - name: Skill frontmatter rules and listing budget
         run: ./scripts/check-frontmatter.sh
 
+      - name: Changelog fragments are well-formed
+        run: python3 scripts/changelog_fragments.py check
+
       - name: Plugin hook tests
         run: bash plugins/doc-drift/tests/test-check-doc-drift.sh
 
@@ -47,7 +50,7 @@ jobs:
         run: |
           python3 --version  # schema.py needs 3.11+ (StrEnum)
           python3 -m pip install --quiet pytest
-          python3 -m pytest plugins/reviewer/tests -q
+          python3 -m pytest plugins/reviewer/tests scripts/tests -q
 
   evals:
     name: Plugin evals (manual)

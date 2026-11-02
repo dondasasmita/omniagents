@@ -3,7 +3,9 @@
 All notable changes to the **omniagents** marketplace are recorded here. The
 format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the
 marketplace uses lockstep [Semantic Versioning](https://semver.org/) — every
-plugin moves together under one version per release. See
+plugin moves together under one version per release. Entries arrive as
+fragment files under `changelog/unreleased/` (feature PRs never edit this
+file directly); `make release` assembles them into `[Unreleased]`. See
 [Versioning and releases](./README.md#versioning-and-releases) in the README for
 the bump rules and the release workflow.
 

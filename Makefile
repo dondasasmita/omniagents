@@ -18,6 +18,10 @@ sync-codex:
 check-frontmatter:
 	@./scripts/check-frontmatter.sh
 
+.PHONY: check-changelog
+check-changelog:
+	@python3 scripts/changelog_fragments.py check
+
 # ==================================================================
 # Release  (lockstep — every plugin moves together under one version)
 # ==================================================================
@@ -37,6 +41,7 @@ help:
 	@echo "  make validate                Validate the marketplace manifest"
 	@echo "  make sync-codex              Regenerate the Codex marketplace from the Claude manifests"
 	@echo "  make check-frontmatter        Enforce SKILL.md frontmatter rules and listing budget"
+	@echo "  make check-changelog          Validate pending changelog fragments"
 	@echo ""
 	@echo "Release (lockstep — all plugins share one version):"
 	@echo "  make release VERSION=x.y.z   Bump all manifests, stamp CHANGELOG, validate, commit, tag vX.Y.Z"

@@ -417,8 +417,24 @@ After switching or rolling back, run `/plugin marketplace update omniagents` and
 
 ### Cutting a release (maintainers)
 
-Accumulate notes under `## [Unreleased]` in `CHANGELOG.md` as you work. Before
-tagging, run the eval suites (Actions → **VALIDATE** → *Run workflow* — see
+Each PR records its release notes as a **fragment** — a file
+`changelog/unreleased/<section>--<slug>.md` whose content is the exact bullet
+line(s) that belong under that section of `[Unreleased]` (`section` is one of
+`added`, `changed`, `deprecated`, `removed`, `fixed`, `security`):
+
+```bash
+$ cat changelog/unreleased/fixed--catalogue-hygiene.md
+- **Catalogue hygiene (gap L1)** — deleted the orphaned `plugins/tech-lead/`
+  directory and properly catalogued `notion`.
+```
+
+Feature PRs **never edit `CHANGELOG.md` directly** — a long series of PRs
+each inserting at the same `[Unreleased]` anchor is a guaranteed conflict
+machine. `make check-changelog` (also run in VALIDATE) rejects malformed
+fragments, and `make release` folds whatever is pending into
+`## [Unreleased]` before stamping the version, so the CHANGELOG has exactly
+one writer: the release itself. Before tagging, run the eval suites
+(Actions → **VALIDATE** → *Run workflow* — see
 [Plugin evals](#plugin-evals-manual)) and record in the release's CHANGELOG
 section the pass rate per suite and the with-vs-without activation delta for
 the trigger guards — the release notes then say not just what changed but that
@@ -452,6 +468,30 @@ git push origin main && git push origin v0.2.1
 Users on a pinned tag are unaffected until they re-add the marketplace at a
 newer ref; users on `main` receive the revert on their next
 `/plugin marketplace update omniagents`.
+
+### Long PR series (stacked branches from a fork)
+
+A series of PRs meant to merge in a fixed order (like the gap-closure series)
+is stacked **locally**: each branch is rebased onto its predecessor, and the
+PRs all target `main` and merge strictly in stack order. Fork-based PRs can't
+use GitHub's stacked-PR bases (a PR's base branch must live in the upstream
+repo), so the chain lives on the fork and is kept current by one command:
+
+```bash
+git fetch origin
+git rebase --update-refs origin/main   # from the stack tip: rebases the chain, moves every branch ref
+git push --force-with-lease fork <each-updated-branch>
+```
+
+Rules that keep the series mechanical instead of a conflict festival:
+
+- Merge order = stack order, never out of order.
+- After each merge (or once per batch), run the pass above from the tip.
+- Release notes go in fragments, not `CHANGELOG.md` edits, so sibling PRs
+  never collide at the `[Unreleased]` anchor.
+- Squash-merges leave the remaining PRs' diffs stale (they still show
+  already-merged hunks) until the next `--update-refs` pass — cosmetic, and
+  the pass fixes it.
 
 ---
 

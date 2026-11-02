@@ -2,8 +2,9 @@
 #
 # release.sh — cut a lockstep release of the omniagents marketplace.
 #
-# Bumps every plugin.json + the marketplace manifest to ONE version, stamps the
-# CHANGELOG, validates, commits, and tags vX.Y.Z. It does NOT push — review the
+# Bumps every plugin.json + the marketplace manifest to ONE version, folds
+# pending changelog fragments, stamps the CHANGELOG, validates, commits, and
+# tags vX.Y.Z. It does NOT push — review the
 # commit, then:
 #   git push origin main && git push origin vX.Y.Z
 # Pushing the tag triggers the RELEASE workflow, which validates and publishes
@@ -95,6 +96,16 @@ for f in "${MANIFESTS[@]:1}"; do bump "$f" '.version'; done
 CHANGED+=(".agents/plugins/marketplace.json")
 while IFS= read -r f; do CHANGED+=("$f"); done \
 	< <(git ls-files -- 'plugins/*/.codex-plugin/plugin.json' | sort)
+
+# 1.7 Fold pending changelog fragments into [Unreleased] (feature PRs add
+#     files under changelog/unreleased/; they become this release's notes).
+if ls changelog/unreleased/*.md >/dev/null 2>&1; then
+	command -v python3 >/dev/null 2>&1 \
+		|| { echo "error: python3 is required to fold changelog fragments"; exit 1; }
+	echo "Folding changelog fragments..."
+	python3 scripts/changelog_fragments.py assemble
+	CHANGED+=("changelog")
+fi
 
 # 2. Stamp the CHANGELOG: insert a dated section after "## [Unreleased]" so its
 #    accumulated entries become this release, leaving a fresh empty Unreleased.
